@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">樂透號碼</string>
+    <string name="btn_random">開  始</string>
+    <string name="btn_retry">重新開始</string>
+    <string name="lotte">大樂透號碼</string>
+    <string name="lotte_basic_play">
+        您必須從01~49中任選6個號碼進行投注。\n
+        開獎單位將隨機開出六個號碼加一個特別號，\n
+        您的六個選號中，如果有三個以上（含三個號碼）對中當期開出之六個號碼\n
+        （特別號只適用於貳獎、肆獎、陸獎和柒獎），即為中獎，並可依規定兌領獎金。\n
+    </string>
+    <string name="special_number">特別號</string>
+    <string name="super_lotto">威力彩號碼</string>
+    <string name="super_lotte_play">
+        威力彩選號分為兩區，您必須從第1個選號區中的01~38 的號碼中任選6個號碼，\n
+        並從第2個選號區中的01~08的號碼中任選1個號碼進行投注，\n
+        這六個+一個號碼即為您的投注號碼。\n
+        您第1區的選號中，如果對中當期第1區開出之任一個獎號，\n
+        而第2區亦對中當期第2區開出之獎號，即為中獎(普獎)，並可依規定兌領獎金。\n
+    </string>
+    <string name="super_lotto2">第二區號碼</string>
+    <string name="betting_on"> 儲存投注號碼 </string>
+    <string name="basic_play">玩法說明</string>
+    <string name="big_lotto">大福彩</string>
+    <string name="big_lotto_basic_play">
+    您必須從01~40中任選七個號碼進行投注。\n
+    開獎單位將從01~40的號碼中隨機開出七個號碼加一個特別號，\n
+    您的七個選號中，如果有三個以上(含三個號碼)對中當期開出之七個號碼 \n
+    (特別號只適用於大福獎、小福獎)，即為中獎(普獎)，並可依規定兌領獎金。\n
+    </string>
+    <string name="star_lotto">3星彩 4星彩</string>
+    <string name="star3_lotto">3星彩</string>
+    <string name="star4_lotto">4星彩</string>
+    <string name="star_lotto_play">
+        3星彩是一種三位數字遊戲，您必須從000~999中選出一組三位數，並選擇玩法，進行投注。\n
+        開獎時，開獎單位將從000~999中隨機開出一組三位數號碼，該組號碼就是該期3星彩的中獎號碼，也稱為「獎號」。\n\n
+        4星彩是一種四位數字遊戲，您必須從0000~9999中選出一組四位數，並選擇玩法，進行投注。
+        開獎時，開獎單位將從0000~9999中隨機開出一組四位數號碼，這一組號碼即為該期4星彩的中獎號碼，也稱為「獎號」。\n
+        您必須依照您投注時選擇的玩法與選號進行對獎。每種玩法的獎金倍數將因其中獎機率的不同而異。\n
+
+    </string>
+
+    <string name="lotto_539">今彩539</string>
+    <string name="lotto_539_play">
+        您必須從01~39的號碼中任選5個號碼進行投注。\n
+        ，五個選號中，如有二個以上（含二個號碼）對中當期開出之五個號碼，\n
+        即為中獎。\n
+    </string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="taiwan_lottery">台灣彩券</string>
+    <string name="taiwan_big_lottery"><a href="http://www.taiwanlottery.com.tw/Lotto740/index.asp">
+        前往台灣彩券-大福彩玩法說明</a> </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="lotto_play_type_array">
+        <item>請選擇樂透種類</item>
+        <item>大樂透</item>
+        <item>威力彩</item>
+        <item>大福彩</item>
+        <item>今彩539</item>
+        <item>3星彩</item>
+        <item>4星彩</item>
+    </string-array>
+</resources>
