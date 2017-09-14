@@ -1,6 +1,7 @@
-package com.admin.claire.lotto;
+package com.admin.claire.lotto.view;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -11,27 +12,25 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 
+import com.admin.claire.lotto.R;
 import com.admin.claire.lotto.adapter.MyPagerAdapter;
 import com.admin.claire.lotto.adapter.MyRecyclerViewAdapter;
 import com.admin.claire.lotto.fragment.BigLottoFragment;
-import com.admin.claire.lotto.fragment.HistoryFragment;
 import com.admin.claire.lotto.fragment.Lotto539Fragment;
-import com.admin.claire.lotto.fragment.LottoFragment;
+import com.admin.claire.lotto.fragment.Star4Fragment;
 import com.admin.claire.lotto.fragment.StarLottoFragment;
-import com.admin.claire.lotto.fragment.SupperLottoFragment;
 
 /**
  * 搭配TabLayout 和 ViewPager 切換頁面
@@ -128,7 +127,14 @@ public class MainActivity extends AppCompatActivity {
                 openFragment(new Lotto539Fragment(),"今彩539");
                 break;
             case R.id.nav_Third_fragment:
-                openFragment(new StarLottoFragment(),"3星彩,4星彩");
+                openFragment(new StarLottoFragment(),"3星彩");
+                break;
+            case R.id.nav_Fourth_fragment:
+                openFragment(new Star4Fragment(),"4星彩");
+                break;
+
+            case R.id.nav_lucky:
+                startActivity(new Intent(MainActivity.this, LuckyLayoutActivity.class));
                 break;
 
             case R.id.nav_taiwan_lottery:
@@ -195,9 +201,36 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 mDrawer.openDrawer(GravityCompat.START);
                 return true;
-
+            case R.id.action_about:
+                aboutDialog();
+                break;
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void aboutDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("樂透幸運號碼");
+        dialog.setIcon(R.drawable.chinese_ingot);
+        dialog.setMessage("樂透幸運號碼，為娛樂性質，號碼僅供參考");
+        dialog.create();
+        dialog.setPositiveButton("前往台灣彩券", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String url = "http://www.taiwanlottery.com.tw/index_new.aspx";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+        dialog.setNegativeButton("關閉", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }

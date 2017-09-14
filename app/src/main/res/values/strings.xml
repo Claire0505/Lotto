@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">樂透號碼</string>
+    <string name="app_name">樂透幸運號碼</string>
+    <string name="lucky_day">幸運轉盤</string>
     <string name="btn_random">開  始</string>
     <string name="btn_retry">重新開始</string>
+    <string name="about">關於</string>
     <string name="lotte">大樂透號碼</string>
     <string name="lotte_basic_play">
         您必須從01~49中任選6個號碼進行投注。\n

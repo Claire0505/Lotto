@@ -62,7 +62,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         final Betting singleBetting = filterList.get(position); //filter
         holder.betting_text.setText(singleBetting.getBettingNum());
         holder.datetime_text.setText(singleBetting.getLocalDateTime());
@@ -72,12 +72,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder>{
         holder.image_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(mContext, singleBetting.getBettingNum() +
-//                                singleBetting.getLocalDateTime(),
-//                        Toast.LENGTH_SHORT).show();
-
                 editTaskDialog(singleBetting);
-
             }
         });
 
@@ -91,11 +86,18 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder>{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        filterList.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position,filterList.size());
+                        notifyDataSetChanged();
+
                         mLottoDAO = new LottoDAO(mContext);
                         mLottoDAO.deletedDB(singleBetting.getId());
+
                         //refresh the activity
-                    ((Activity) mContext).finish();
-                    mContext.startActivity(((Activity) mContext).getIntent());
+                    //((Activity) mContext).finish();
+                   // mContext.startActivity(((Activity) mContext).getIntent());
+
                     }
                 });
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -162,10 +164,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder>{
                    // mLottoDAO.updateDB(new Betting(betting.getId(), bettingNum, modifyTime));
                     mLottoDAO.updateDB(betting);
 
-                    //refresh the activity
-//                    ((Activity) mContext).finish();
-//                    mContext.startActivity(((Activity) mContext).getIntent());
-
                     // Set on UI Thread
                     ((Activity)mContext).runOnUiThread(new Runnable() {
                         @Override
@@ -186,51 +184,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder>{
         dialog.show();
     }
 
-    //滑動刪除資料
-    public void removeBettingItem(final int position){
-        Betting betting = bettings.get(position);
-        final long id = betting.getId();
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setTitle("刪除號碼");
-        builder.setMessage(betting.getBettingNum());
-        builder.setIcon(R.drawable.chinese_ingot);
-
-        builder.setPositiveButton("確認", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                LottoDAO mLottoDAO = new LottoDAO(mContext);
-                if (mLottoDAO.deletedDB(id)){
-
-                    bettings.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position,bettings.size());
-                    //refresh the activity
-                    ((Activity) mContext).finish();
-                    mContext.startActivity(((Activity) mContext).getIntent());
-                } else {
-                    Toast.makeText(mContext, "Unable To Delete", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(mContext, "取消刪除", Toast.LENGTH_SHORT).show();
-                // Set on UI Thread
-                ((Activity)mContext).runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        notifyDataSetChanged();
-                    }
-                });
-            }
-        });
-        builder.show();
-
-    }
-
+    //SearView
     public void filter(final String text){
         new Thread(new Runnable() {
             @Override
@@ -248,8 +203,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder>{
 
                             filterList.add(betting);
 
-                            String bettingStr = betting.getBettingNum();
-                           // Log.e(TAG, "run: " + bettingStr);
+                           // Log.e(TAG, "run: " +  betting.getBettingNum());
                         }
 
                     }
@@ -265,6 +219,48 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder>{
 
             }
         }).start();
+    }
+
+    //滑動刪除資料
+    public void removeBettingItem(final int position){
+        final Betting betting = filterList.get(position);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle("刪除號碼");
+        builder.setMessage(betting.getBettingNum());
+        builder.setIcon(R.drawable.chinese_ingot);
+
+        builder.setPositiveButton("確認", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                mLottoDAO = new LottoDAO(mContext);
+                if (mLottoDAO.deletedDB(betting.getId())){
+
+                    filterList.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position,filterList.size());
+                    notifyDataSetChanged();
+
+                    //refresh the activity
+                    ((Activity) mContext).finish();
+                    mContext.startActivity(((Activity) mContext).getIntent());
+
+                } else {
+                    Toast.makeText(mContext, "Unable To Delete", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(mContext, "取消刪除", Toast.LENGTH_SHORT).show();
+                notifyDataSetChanged();
+
+            }
+        });
+        builder.show();
+
     }
 
 }

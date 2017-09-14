@@ -52,7 +52,6 @@ public class HistoryFragment extends Fragment implements SearchView.OnQueryTextL
     private Fragment mContext;
     private String spinnerLotte;
 
-    private ArrayList<Betting> bettingArrayList = new ArrayList<>();
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -63,7 +62,6 @@ public class HistoryFragment extends Fragment implements SearchView.OnQueryTextL
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //要在片段中使用Menu要先設定它
-        // setHasOptionsMenu(true);
         setHasOptionsMenu(true);
 
     }
@@ -80,8 +78,8 @@ public class HistoryFragment extends Fragment implements SearchView.OnQueryTextL
         recyclerView.setLayoutManager(layoutManager);
 
         initRecyclerView();
-        //滑動刪除
-        initSwipe();
+        //滑動刪除 搜尋時刪除資料時會有index 不同的問題暫拿
+       // initSwipe();
 
 
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
@@ -96,14 +94,16 @@ public class HistoryFragment extends Fragment implements SearchView.OnQueryTextL
         return rootView;
     }
 
+
     private void initSwipe() {
-        lottoDAO = new LottoDAO(getActivity());
+         lottoDAO = new LottoDAO(getActivity());
         List<Betting> allBetting = lottoDAO.getAll();
         MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(getActivity(), allBetting);
         //Swipe
         ItemTouchHelper.Callback callback = new SwipeHelper(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
+
     }
 
     private void initRecyclerView() {
