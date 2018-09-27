@@ -40,7 +40,7 @@ public class LuckyTurnTable_SurfaceView extends SurfaceView
 
     // 每塊的顏色
     private int deepColor = 0xFFFF2081;
-    private int lightColor = 0xFFFC0021;
+    private int lightColor = 0xFFac18f1;
     private int[] mColors = new int[]{deepColor, lightColor, deepColor,
             lightColor, deepColor, lightColor,};
 

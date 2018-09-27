@@ -32,6 +32,10 @@ import com.admin.claire.lotto.fragment.Lotto539Fragment;
 import com.admin.claire.lotto.fragment.Star4Fragment;
 import com.admin.claire.lotto.fragment.StarLottoFragment;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 /**
  * 搭配TabLayout 和 ViewPager 切換頁面
  * 使用自定義的MyPagerAdapter extends FragmentPagerAdapter，來切換各個fragment
@@ -61,10 +65,19 @@ public class MainActivity extends AppCompatActivity {
 
     private MyRecyclerViewAdapter mAdatper;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        //放廣告
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         initNavigationDrawer();
         myTabViewPager();

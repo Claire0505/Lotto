@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import java.util.Random;
 
 import com.admin.claire.lotto.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class LuckyLayoutActivity extends AppCompatActivity {
 
@@ -21,6 +23,11 @@ public class LuckyLayoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lucky_layout);
+
+        //放廣告
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         toolbar = (Toolbar)findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
